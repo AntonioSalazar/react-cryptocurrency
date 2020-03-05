@@ -1,25 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from '@emotion/styled';
+import imgCrypto from './cryptomonedas.png';
+
+const Container = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 2rem;
+  }
+`;
+
+
+const CryptoImg = styled.img`
+  max-width: 100%;
+  margin-top: 5rem;
+`;
+
+const Heading = styled.h1`
+
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <div>
+        <CryptoImg 
+          src={imgCrypto}
+          alt='crypto img'
+        /> 
+
+      </div>
+      <div>
+
+      </div>
+    </Container>
   );
 }
 
