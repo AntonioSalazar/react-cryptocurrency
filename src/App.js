@@ -19,7 +19,21 @@ const CryptoImg = styled.img`
 `;
 
 const Heading = styled.h1`
+  font-family: 'Bebas Neue', cursive;
+  color: #FFf;
+  text-align: left;
+  font-weight: 700; 
+  font-size: 50px;
+  margin-bottom: 50px;
+  margin-top: 80px;
 
+  &::after{
+    content: '';
+    width: 100px;
+    height: 6px;
+    background-color: #66a2fe;
+    display: block;
+  }
 `;
 
 function App() {
@@ -33,7 +47,7 @@ function App() {
 
       </div>
       <div>
-
+        <Heading>Quote crypto currency prices:</Heading>
       </div>
     </Container>
   );
