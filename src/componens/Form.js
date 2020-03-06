@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+
+//Custom Hook
+import useCurrency from '../hooks/useCurrency';
+
+
 const Button = styled.input`
     margin-top: 20px;
     font-weight: bold;
@@ -20,10 +25,11 @@ const Button = styled.input`
 
 const Form = () => {
 
+    const [ currency, SelectCurrency, setState ] = useCurrency();
 
     return ( 
         <form>
-
+            <SelectCurrency />
             <Button 
                 type="submit"
                 value='Get price!'
