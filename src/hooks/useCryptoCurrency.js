@@ -22,12 +22,12 @@ const SelectInput = styled.select`
     font-size: 1.2rem;
 `;
 
-const useCurrency = (label, initialState, currenciesOptions) => {
+const useCryptoCurrency = (label, initialState, currenciesOptions) => {
      
     //state from our custom hook
     const [state, setState] = useState(initialState)
 
-    const SelectCurreny = () => (
+    const SelectCryptoCoin = () => (
         <Fragment>
             <Label>{label}</Label>
                 <SelectInput
@@ -35,16 +35,16 @@ const useCurrency = (label, initialState, currenciesOptions) => {
                     value={state}
                 >
                     <option value=''>-- Select --</option>
-                    { currenciesOptions.map( option => (
+                    {/* { currenciesOptions.map( option => (
                         <option  key={option.code} value={option.code}>{option.name}</option>
-                    ))}
+                    ))} */}
                 </SelectInput>
             
         </Fragment>
     )
 
     //Return the state, what it, gets displayed and the function that modifies the state
-    return [ state, SelectCurreny]
+    return [ state, SelectCryptoCoin]
 }
  
-export default useCurrency;
+export default useCryptoCurrency;

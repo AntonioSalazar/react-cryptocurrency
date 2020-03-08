@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 //Custom Hook
 import useCurrency from '../hooks/useCurrency';
+import useCryptoCurrency from '../hooks/useCryptoCurrency';
 
 
 const Button = styled.input`
@@ -32,11 +33,18 @@ const Form = () => {
         { code : 'GBP', name: 'Sterling Pound'}
     ];
 
+    //Using UseCurrency hook
     const [ currency, SelectCurrency, setState ] = useCurrency('Chose a currency', '', CURRENCIES);
+
+    //Using UseCryptoCurrency Hook
+    const [ cryptoCurrency, SelectCryptoCoins ] = useCryptoCurrency('Choose a crypto currency', '' );
 
     return ( 
         <form>
             <SelectCurrency />
+
+            <SelectCryptoCoins />
+
             <Button 
                 type="submit"
                 value='Get price!'
