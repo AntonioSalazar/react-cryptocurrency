@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import imgCrypto from './cryptomonedas.png';
 import Form from './componens/Form';
+import Axios from 'axios';
 
 const Container = styled.div`
   max-width: 900px;
@@ -39,6 +40,24 @@ const Heading = styled.h1`
 
 function App() {
 
+
+  const [ currencyApp, setCurrencyApp ] = useState('');
+  const [ cryptoCurrencyApp, setCryptoCurrencyApp ] = useState('');
+
+  //Quote of the choosed crypto currency and currency
+  useEffect(() => {
+    
+    
+    const quoteCall = async () => {
+      if (currencyApp === '')   return;
+      const quoteURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrencyApp}&tsyms=${currencyApp}`;
+
+      const quoteResult = await Axios.get(quoteURL);
+      console.log(quoteResult.data.DISPLAY[cryptoCurrencyApp][currencyApp]);
+    }
+    quoteCall();
+  }, [ currencyApp, cryptoCurrencyApp])
+
   return (
     <Container>
       <div>
@@ -52,7 +71,8 @@ function App() {
         <Heading>Get crypto currency prices:</Heading>
 
         <Form
-
+          setCurrencyApp={setCurrencyApp}
+          setCryptoCurrencyApp={setCryptoCurrencyApp}
         />
       </div>
     </Container>

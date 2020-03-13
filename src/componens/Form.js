@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Error from './Error';
 import styled from '@emotion/styled';
 
 
@@ -25,11 +26,12 @@ const Button = styled.input`
     }
 `;
 
-const Form = () => {
+const Form = ({setCurrencyApp, setCryptoCurrencyApp}) => {
 
     //State of the form, will hold a list of crypto currencies
 
     const [ cryptoList, setCryptoList ] = useState([]);
+    const [ error, setError ] = useState(false);
 
     const CURRENCIES = [
         { code : 'USD', name: 'US Dollar'},
@@ -55,8 +57,28 @@ const Form = () => {
         apiCall();
     }, []);
 
+    //when the user hits the 'get price!' btn
+
+    const getPrice = e => {
+        e.preventDefault();
+
+        //Check if both fields are filled
+        if(currency === '' || cryptoCurrency === ''){
+            setError(true);
+            return
+        }
+        setError(false);
+
+        //Send the data to the App component
+        setCurrencyApp(currency);
+        setCryptoCurrencyApp(cryptoCurrency);
+    }
+
     return ( 
-        <form>
+        <form
+            onSubmit={getPrice}
+        >
+            { error ? <Error message='All the fields are required'/> : null }
             <SelectCurrency />
 
             <SelectCryptoCoins />
