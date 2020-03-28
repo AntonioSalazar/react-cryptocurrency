@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import imgCrypto from './cryptomonedas.png';
-import Form from './componens/Form';
+import Form from './components/Form';
+import Quote from './components/Quote';
+import Spinner from './components/Spinner';
+
 import Axios from 'axios';
 
 const Container = styled.div`
@@ -43,6 +46,9 @@ function App() {
 
   const [ currencyApp, setCurrencyApp ] = useState('');
   const [ cryptoCurrencyApp, setCryptoCurrencyApp ] = useState('');
+  const [ result, setResult ] = useState({});
+  const [ loading, SetLoading ] = useState(false);
+
 
   //Quote of the choosed crypto currency and currency
   useEffect(() => {
@@ -53,10 +59,25 @@ function App() {
       const quoteURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrencyApp}&tsyms=${currencyApp}`;
 
       const quoteResult = await Axios.get(quoteURL);
-      console.log(quoteResult.data.DISPLAY[cryptoCurrencyApp][currencyApp]);
+
+      //Show the spinner
+      SetLoading(true);
+      //Hide de spinner and show the result
+      setTimeout(() => {
+
+
+        SetLoading(false);
+
+        //save quote
+        setResult(quoteResult.data.DISPLAY[cryptoCurrencyApp][currencyApp]);
+      }, 3000);
+
     }
     quoteCall();
-  }, [ currencyApp, cryptoCurrencyApp])
+  }, [ currencyApp, cryptoCurrencyApp]);
+
+  //Show the spinner or the result
+  const component = (loading) ? <Spinner /> :  <Quote result={result}/>
 
   return (
     <Container>
@@ -74,6 +95,9 @@ function App() {
           setCurrencyApp={setCurrencyApp}
           setCryptoCurrencyApp={setCryptoCurrencyApp}
         />
+
+        {component}
+
       </div>
     </Container>
   );
